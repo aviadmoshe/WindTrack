@@ -1,0 +1,35 @@
+{% extends 'torasearch/base.html' %}
+
+{% load crispy_forms_tags %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if title%}
+        {{title}}
+        {%else%}
+        Registration
+        {%endif%}
+    </title>
+</head>
+<body>
+{% block register%}
+
+
+<div class="container">
+<div class="col-sm-6">
+    <form action =''  method = "post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <!--
+        {% include 'torasearch/form-template.html' %}
+        -->
+        <div>
+            <button type = 'submit' value="Submit">Submit</button>
+        </div>
+
+    </form>
+</div>
+</div>
+
+{%endblock register%}
+</body>

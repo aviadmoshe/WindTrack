@@ -1,0 +1,107 @@
+{% extends 'torasearch/base.html' %}
+{% load staticfiles %}
+{% block header %}
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'index' %}">Home Page</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href='{%url "yeshiva_add"%}'>Add New School <span class="sr-only">(current)</span></a></li>
+                <li><a href="/ToraSearch/search/">Search</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href='{%url "logout"%}'>Logout</a></li>
+                 <li><a href="#">Hi!  {{user}}</a></li>
+                {% else %}
+                <li><a href='{%url "register"%}'>Register</a></li>
+                <li><a href='{%url "login"%}'>Login</a></li>
+                {% endif %}
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-sm-3 col-lg-2">
+        <h3>Left Sidebar</h3>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href='#'>Another Link 1</a></li>
+          <li><a href='#'>Another Link 2</a></li>
+          <li><a href='#'>Another Link 3</a></li>
+        </ul>
+    </div>
+{% endblock header %}
+{% block detail %}
+<link rel="stylesheet" type="text/css" href="{%static 'ToraSearch/chat_box.css'%}" />
+<h1>Yeshiva {{object.name}}</h1>
+
+<p>
+    <a href = '{%  url "upload"%}'><h2>add your text's here!</h2></a>
+</p>
+
+<p>
+    {% for tora in object.yeshiva.all %}
+    {% if tora.text%}
+    {% include "torasearch/chat_box.html" with person="aviad" greeting="Hello" %}
+    <a href = {{tora.text.url}}><h6>{{ tora.pk }}</h6></a>
+    <a href = 'ReadText/{{tora.pk}}'><button>get text</button></a>
+    {%endif%}
+    {%endfor%}
+</p>
+
+
+<div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+
+
+      </div>
+
+{% endblock detail %}

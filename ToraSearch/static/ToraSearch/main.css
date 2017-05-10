@@ -1,0 +1,49 @@
+html{
+    height:100%
+}
+
+body {
+    background-color: white;
+    padding-bottom: 100px;
+    height:100%
+}
+
+header{
+    height:100%
+}
+
+li a {
+    color: green;
+}
+
+.jumbotron {
+    background-image: url("images/wind2.jpeg");
+    background-color: #17234E;
+    margin-bottom: 0;
+    text-align: right;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 130%;
+    color: black;
+    position:relative;
+
+}
+
+.flex-container {
+
+    display:flex;
+    flex-direction: column;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+
+}
+
+.flex-btn{
+    position:absolute;                  /* added */
+    bottom:0;                           /* added */
+    center:0;
+    padding: 20px;
+
+
+}

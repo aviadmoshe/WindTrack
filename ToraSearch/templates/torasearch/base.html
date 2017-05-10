@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+         <!-- Bootstrap -->
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{%static 'ToraSearch/main.css'%}" />
+        <title>
+            {% block title %}
+                Tora Search
+            {% endblock title %}
+        </title>
+        {% block head_extra %}{% endblock head_extra %}
+        {% block header %}
+        {% endblock header %}
+    </head>
+
+    <body>
+        {%block detail %}{% endblock detail %}
+        {%block jumbo%}{%endblock jumbo%}
+        {%block upload%}{%endblock upload%}
+        {% block register %}{% endblock register %}
+        {% block content %}{% endblock content %}
+        {% block search %}{% endblock search %}
+        {% block footer %}{% endblock footer %}
+    <!-- include javascript, jQuery FIRST -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="{%static 'ToraSearch/main.js'%}" ></script>
+    </body>
+</html>

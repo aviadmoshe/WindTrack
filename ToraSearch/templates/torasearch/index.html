@@ -1,0 +1,173 @@
+{% extends 'torasearch/base.html' %}
+{% load staticfiles %}
+{% block title %}
+    Homepage - {{ block.super }}
+{% endblock title %}
+{% block header %}
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'index' %}">Home Page</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href='{%url "yeshiva_add"%}'>Add New School <span class="sr-only">(current)</span></a></li>
+                <li><a href="/ToraSearch/search/">Search</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li><a href='{%url "logout"%}'>Logout</a></li>
+                 <li><a href="#">Hi!  {{user}}</a></li>
+                {% else %}
+                <li><a href='{%url "register"%}'>Register</a></li>
+                <li><a href='{%url "login"%}'>Login</a></li>
+                {% endif %}
+
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-sm-3 col-lg-2">
+        <h3>Left Sidebar</h3>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><a href='#'>Another Link 1</a></li>
+          <li><a href='#'>Another Link 2</a></li>
+          <li><a href='#'>Another Link 3</a></li>
+        </ul>
+    </div>
+{% endblock header %}
+
+{% block content %}
+<!--
+{% if user.is_authenticated %}
+<h1>Online</h1>
+{% else %}
+<h1>Offline</h1>
+{% endif %}
+<h1> Hi!  {{user}} </h1>
+
+<div class='container'>
+
+      <div id='content' class='row'>
+        <div class='span8 main'>
+            <h2>Main Content Section</h2>
+                <div class="gallery_product col-lg-2 col-md-2 col-sm-4 col-xs-6 filter hdpe">
+                    <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+                </div>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.<p>
+
+            <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+        </div>
+      </div>
+    </div>
+-->
+
+{% if object_list %}
+<div class="container">
+    {% for yeshiva in object_list %}
+	<div class="row">
+		<h2 class="text-center">you have {{object_list.count}} yeshivot</h2>
+        <hr/>
+	</div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <h4>
+                    <a href = "/ToraSearch/{{yeshiva.id}}">{{yeshiva.name}} </a>
+                    <span class="label label-info info">
+                        <span data-toggle="tooltip" title="viewed">1 <b class="glyphicon glyphicon-eye-open"></b></span>
+                        <span data-toggle="tooltip" title="viewed">1 <b class="glyphicon glyphicon-star"></b></span>
+                        <span data-toggle="tooltip" title="Bootstrap version">1.0</span>
+                    </span>
+                </h4>
+                <img src="{% static 'images/wind.jpg'%}" alt="...">
+                <a href = "{% url 'yeshiva_delete' yeshiva.id%}" class="btn btn-primary col-xs-12" role="button">Delete</a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{%else%}
+	<h3> you didn't  register any yeshivot yet</h3>
+{%endif%}
+
+<!--
+{% if object_list %}
+	<ul>
+		{% for yeshiva in object_list %}
+			<li><a href = "/ToraSearch/{{yeshiva.id}}">{{yeshiva.name}} </a></li>
+            <a href = "{% url 'yeshiva_delete' yeshiva.id%}"><h6>delete</h6></a>
+		{%endfor%}
+
+	</ul>
+{%else%}
+	<h3> you didn't  register any yeshivot yet</h3>
+{%endif%}
+-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-xs-push-3 col-sm-6 col-lg-6 col-sm-push-3 col-lg-push-3">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#contains">Contains</a></li>
+                      <li><a href="#its_equal">It's equal</a></li>
+                      <li><a href="#greather_than">Greather than ></a></li>
+                      <li><a href="#less_than">Less than < </a></li>
+                      <li class="divider"></li>
+                      <li><a href="#all">Anything</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" dir="rtl" class="form-control" name="x" placeholder="החיפוש...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+	</div>
+</div>
+
+{% endblock content %}
